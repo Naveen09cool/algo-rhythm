@@ -1,6 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
-import { join } from 'path';
+import * as entities from '../database/entities';
 
 export const typeOrmConfig = async (configService: ConfigService): Promise<TypeOrmModuleOptions> => ({
     type: 'postgres',
@@ -9,6 +9,6 @@ export const typeOrmConfig = async (configService: ConfigService): Promise<TypeO
     username: configService.get<string>('POSTGRES_USER'),
     password: configService.get<string>('POSTGRES_PASSWORD'),
     database: configService.get<string>('POSTGRES_DB'),
-    entities: [join(__dirname, '..', '**', '*.entity{.ts,.js}')],
+    entities: Object.values(entities).filter((entity) => typeof entity === 'function'),
     synchronize: true, // Auto-create tables (disable in production)
 });

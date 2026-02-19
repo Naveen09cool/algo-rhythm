@@ -12,13 +12,13 @@ export class User {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ unique: true })
+    @Column({ unique: true, nullable: false })
     email: string;
 
-    @Column({ name: 'password_hash' })
+    @Column({ name: 'password_hash', nullable: false })
     passwordHash: string;
 
-    @Column()
+    @Column({ unique: true, nullable: false })
     username: string;
 
     @Column({
@@ -28,6 +28,9 @@ export class User {
         name: 'subscription_tier',
     })
     subscriptionTier: UserSubscriptionTier;
+
+    @Column({ default: false })
+    isArtist: boolean;
 
     @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;
