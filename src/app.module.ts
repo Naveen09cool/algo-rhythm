@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './configurations/database.module';
 import { UserModule } from './modules/user/user.module';
+import { TrackModule } from './modules/tracks/track.module';
+import { PlaybackModule } from './modules/playback/playback.module';
 
 
 @Module({
@@ -13,6 +15,8 @@ import { UserModule } from './modules/user/user.module';
     }),
     DatabaseModule,
     UserModule,
+    TrackModule,
+    PlaybackModule,
   ],
 
   controllers: [AppController],
